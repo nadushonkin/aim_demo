@@ -65,7 +65,7 @@ class ConvNet(nn.Module):
         return self.fc(x)
 
 # Обучение + логгирование модели
-def train_and_log(model, model_name):
+def train_and_log(model, model_name, lr):
     run = Run(experiment="FashionMNIST_Model_Comparison")
     run["model_name"] = model_name
     run["hparams"] = {"lr": lr, "batch_size": batch_size, "epochs": epochs, "model": model_name}
@@ -124,5 +124,6 @@ def train_and_log(model, model_name):
         plt.close(fig)
 
 # Запускаем эксперименты
-train_and_log(SimpleNet(), "SimpleNet_MLP")
-train_and_log(ConvNet(), "ConvNet_CNN")
+train_and_log(SimpleNet(), "SimpleNet_MLP", 0.001)
+train_and_log(SimpleNet(), "SimpleNet_MLP", 0.0001)
+train_and_log(ConvNet(), "ConvNet_CNN", 0.001)
